@@ -34,7 +34,7 @@ struct ContentView: View {
                             Image(.silverpiece)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 33)
+                                .frame(height: 34)
                         
                             Text("Silver Piece")
                                 .font(.headline)
@@ -59,7 +59,7 @@ struct ContentView: View {
                             Image(.goldpiece)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 33)
+                                .frame(height: 34)
                         }
                         
                         TextField("Amount", text: $rightAmount)
@@ -71,7 +71,7 @@ struct ContentView: View {
                 .padding(.bottom, 26)
                 .padding(.top, 14)
                 .background(.black.opacity(0.5))
-                .clipShape(.capsule)
+                .clipShape(.rect(cornerRadius: 12))
                 
                 Spacer()
                 
@@ -90,6 +90,9 @@ struct ContentView: View {
             }
             .padding(.horizontal, 8)
 //            .border(.blue)
+        }
+        .sheet(isPresented: $showExchangeInfo) {
+            ExchangeInfoView()
         }
     }
 }

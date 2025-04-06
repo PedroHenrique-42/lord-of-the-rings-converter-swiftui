@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     @State var showExchangeInfo = false
     @State var leftAmount = ""
     @State var rightAmount = ""
@@ -98,5 +98,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }

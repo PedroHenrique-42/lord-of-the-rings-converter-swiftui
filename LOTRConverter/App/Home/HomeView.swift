@@ -9,8 +9,13 @@ import SwiftUI
 
 struct HomeView: View {
     @State var showExchangeInfo = false
+    @State var showSelectCurrency = false
+    
     @State var leftAmount = ""
     @State var rightAmount = ""
+    
+    @State var leftCurrency: Currency = .silverPiece
+    @State var rightCurrency: Currency = .goldPiece
     
     var body: some View {
         ZStack {
@@ -31,14 +36,17 @@ struct HomeView: View {
                 HStack {
                     VStack {
                         HStack {
-                            Image(.silverpiece)
+                            Image(leftCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 34)
                         
-                            Text("Silver Piece")
+                            Text(leftCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
+                        }
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
                         }
                     
                         TextField("Amount", text: $leftAmount)
@@ -52,14 +60,17 @@ struct HomeView: View {
                     
                     VStack {
                         HStack {
-                            Text("Gold Piece")
+                            Text(rightCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
                             
-                            Image(.goldpiece)
+                            Image(rightCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 34)
+                        }
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
                         }
                         
                         TextField("Amount", text: $rightAmount)
@@ -89,10 +100,15 @@ struct HomeView: View {
                 }
             }
             .padding(.horizontal, 8)
-//            .border(.blue)
         }
         .sheet(isPresented: $showExchangeInfo) {
             ExchangeInfoView()
+        }
+        .sheet(isPresented: $showSelectCurrency) {
+            SelectCurrencyView(
+                topCurrency: $leftCurrency,
+                bottomCurrency: $rightCurrency
+            )
         }
     }
 }
